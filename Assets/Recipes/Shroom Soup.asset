@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7cf2b04c61d0f44b93176d1ad04aa1, type: 3}
+  m_Name: Shroom Soup
+  m_EditorClassIdentifier: 
+  isActive: 0
+  title: Shroom Soup
+  monster1: {fileID: 21300000, guid: 9fef864d62967a94db2c69c490464b8f, type: 3}
+  monster2: {fileID: 0}
+  dish: {fileID: 21300000, guid: 8a7aae86a66530c43aee2c674e71d638, type: 3}
+  ingredientsComplete: 1
+  complete: 1
+  deaths: 0
+  dialogue:
+    chefsImage: {fileID: 21300000, guid: 3341eb3c940507349a4476b3225279b5, type: 3}
+    name: Vofura
+    initialDialogue: Here I'll teach you courage, be brave to fight against the toughest
+      creatures on this planet.
+    completeDialogue: Well Done, human.
+  Ingredients:
+  - type: 11
+    icon: {fileID: 21300000, guid: c1da155f6ea323846bfabcd5b07e9ec9, type: 3}
+    amount: 3
+    currentAmount: 0
+  - type: 12
+    icon: {fileID: 21300000, guid: efae52aff2b2ad44f9c4b26be9bc90c2, type: 3}
+    amount: 5
+    currentAmount: 0
+  - type: 13
+    icon: {fileID: 21300000, guid: 580d9f5d5edc92e48bacb346841335f8, type: 3}
+    amount: 2
+    currentAmount: 0

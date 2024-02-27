@@ -1,0 +1,173 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6864960090336076853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6057038552876154511}
+  m_Layer: 0
+  m_Name: health plant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6057038552876154511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6864960090336076853}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 111.44046, y: 0.485, z: 343.55325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8449023244720872153}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5900820444378797178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082394085262311523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3748663, y: 1.6239215, z: 0.15066138}
+  m_Center: {x: 0.0069781244, y: 0.21086532, z: 0.0015136003}
+--- !u!114 &8877020027513933027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082394085262311523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee1a449043ffe5468ae5c59ebb53438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 267cb16a260b6a9419095eb89acfc2bc, type: 2}
+  player: {fileID: 0}
+  stillThere: 1
+  spawnEffectTime: 2
+  pause: 1
+  fadeIn:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1001 &8271507903587188018
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6057038552876154511}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05444558
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6044016
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0031899246
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 729b36cf1276f8144ade094ae6500917, type: 2}
+    - target: {fileID: 919132149155446097, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+        type: 3}
+      propertyPath: m_Name
+      value: new health plant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c95b3df5fd407824982d1c9ed5c2e39b, type: 3}
+--- !u!1 &9082394085262311523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8271507903587188018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8449023244720872153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c95b3df5fd407824982d1c9ed5c2e39b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8271507903587188018}
+  m_PrefabAsset: {fileID: 0}

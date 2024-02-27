@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7cf2b04c61d0f44b93176d1ad04aa1, type: 3}
+  m_Name: Crunchy Ribs
+  m_EditorClassIdentifier: 
+  isActive: 0
+  title: Crunchy Ribs
+  ingredientsComplete: 1
+  complete: 1
+  deaths: 0
+  Ingredients:
+  - type: 8
+    amount: 2
+    currentAmount: 2
+  - type: 9
+    amount: 2
+    currentAmount: 2
+  - type: 10
+    amount: 2
+    currentAmount: 2

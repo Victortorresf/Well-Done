@@ -1,0 +1,20 @@
+GamePlay Instructions
+Movement - 
+	A - Left
+	D - Right
+	W - Forward
+	S - Backward
+	Left Shift - Run
+
+Look Around - Mouse Movement
+
+Shooting - Left Mouse Button
+Switch Weapons -  
+	1 - Frying Pan(Melee)
+	2 - Toaster Gun(Assault)
+To unlock those bellow the player needs to level up by completing recipes
+	3 - Chilli Shotgun
+	4 - PineApple Grenade
+
+Pause Menu - P
+Exit Windows - Escape Button
