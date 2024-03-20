@@ -22,6 +22,7 @@ public class Shooting : MonoBehaviour
 
     public GameObject impact;
     public GameObject grenadePrefab, donutPrefab;
+    // public GameObject[] weapons;
     public GameObject donut, pan, toaster, grenade;
     public Text ammoText;
     public Camera fpscam;
@@ -50,9 +51,17 @@ public class Shooting : MonoBehaviour
     {
         UpdateAmmoCount();
         bool isPaused = pause.gameIsPaused;
-        //Switch/Reload and Unlock weapons by level
+        // Switch/Reload and Unlock weapons by level
         if (Input.GetKeyDown("1"))//frying pan
         {
+            /*for(var i; i <= weapons.lenght; i++){ 
+                if(weapons[i].name == "Frying Pan"){
+                    weapons[i].SetActive(true);
+                } else {
+                     weapons[i].SetActive(false);
+                }
+            }
+            */
             weaponType = 1;
             fireRate = 4f;
             minDamage = 20;
