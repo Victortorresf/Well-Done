@@ -25,7 +25,7 @@ public class MountainBeast : MonoBehaviour
         //Check for sight and attack range
         playerInSightRange = Vector3.Distance(transform.position, player.position);
         
-        if (playerInSightRange > sightRange && enemy.IsAtDestination()) enemy.GotoNextWaypoint();
+        if (playerInSightRange > sightRange && enemy.IsAtDestination()) enemy.GotoNextWaypoint(); //------------------------ try deleting this
         
         if (playerInSightRange <= sightRange)
         {
