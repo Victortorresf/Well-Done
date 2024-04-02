@@ -5,34 +5,29 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //Player
-    public int level = 1;
-    public int currentHealth;
-    public int maxHealth = 100;
-    public int speed = 6;
+    // Player Stats
+    public int Level { get; private set; } = 1;
+    public int CurrentHealth { get; private set; }
+    public int MaxHealth = 100;
+    public int Speed { get; private set; } = 10;
 
-    //Camera Movement
-    public float turnSmoothTime = 0.1f;
-    float turnSmoothVelocity;
+    // Camera Movement
+    public float TurnSmoothTime = 0.1f;
 
-    public Vector3 spawnPoint;
-    
-    //UI Recipe Status
-    public Text ingredients;
-    int amount;
-    public Image[] iconsProgress;
-    
-    public HealthBar healthBar;
-    public Recipe quest;
+    // UI Elements
+    public Text IngredientsText;
+    public Image[] IconsProgress;
+    public HealthBar HealthBar;
+    public GameObject RecipeStatusWindow;
+    public GameObject DeathWindow;
 
-   
-    public GameObject recipeStatusWindow;
-    public GameObject deathWindow;
-  
-    public CharacterController controller;
-    public Transform cam;
+    // Other Components
+    public CharacterController Controller;
+    public Transform Cam;
 
-    public Vector3 direction;
+    private Vector3 _spawnPoint;
+    private float _turnSmoothVelocity;
+    private Vector3 _direction;
 
     private void Start()
     {
@@ -45,54 +40,69 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        healthBar.SetHealth(currentHealth);
+        HandleInput();
 
+        HealthBar.SetHealth(CurrentHealth);
+
+        MovePlayer();
+        
+        CheckDeath();
+    }
+
+    private void HandleInput() // This function checks the keys pressed to move the player or the use of the protoype cheat codes.
+    {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        
-         direction = new Vector3(horizontal, 0f, vertical).normalized;
-        if (Input.GetKeyDown("m"))
+
+        _direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
             TakeDamage(10);
         }
 
-        if (Input.GetKeyDown("h")) currentHealth += 10;
-
-        if (Input.GetKeyDown("l"))
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            level++;
+            CurrentHealth += 10;
         }
 
-        if (Input.GetKey("left shift"))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            speed = 25;
+            Level++;
         }
-        else speed = 10;
 
-        if (direction.magnitude >= 0.1f)
+        Speed = Input.GetKey(KeyCode.LeftShift) ? 25 : 10;
+    }
+
+    private void MovePlayer()
+    {
+        if (_direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + Cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            
+
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
-            controller.SimpleMove(Vector3.down);
+            Controller.Move(moveDir.normalized * Speed * Time.deltaTime);
+            Controller.SimpleMove(Vector3.down);
         }
         else
         {
-            controller.SimpleMove(Vector3.down);
+            Controller.SimpleMove(Vector3.down);
         }
+    }
 
-        if (currentHealth <= 0 || transform.position.y <= -10)
+    private void CheckDeath()
+    {
+        if (CurrentHealth <= 0 || transform.position.y <= -10)
         {
             Time.timeScale = 0;
-            deathWindow.SetActive(true);
+            DeathWindow.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
     }
-
+    
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
