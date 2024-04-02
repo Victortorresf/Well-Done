@@ -6,20 +6,17 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     // Player Stats
-    public int Level { get; private set; } = 1;
-    public int CurrentHealth { get; private set; }
-    public int MaxHealth = 100;
+    public int level { get; private set; } = 1;
+    public int currentHealth { get; private set; }
+    public int maxHealth = 100;
     public int Speed { get; private set; } = 10;
 
     // Camera Movement
     public float TurnSmoothTime = 0.1f;
 
     // UI Elements
-    public Text IngredientsText;
-    public Image[] IconsProgress;
-    public HealthBar HealthBar;
-    public GameObject RecipeStatusWindow;
-    public GameObject DeathWindow;
+    public HealthBar healthBar;
+    public GameObject deathWindow;
 
     // Other Components
     public CharacterController Controller;
@@ -42,7 +39,7 @@ public class Player : MonoBehaviour
     {
         HandleInput();
 
-        HealthBar.SetHealth(CurrentHealth);
+        healthBar.SetHealth(currentHealth);
 
         MovePlayer();
         
@@ -63,12 +60,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            CurrentHealth += 10;
+            currentHealth += 10;
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Level++;
+            level++;
         }
 
         Speed = Input.GetKey(KeyCode.LeftShift) ? 25 : 10;
@@ -94,10 +91,10 @@ public class Player : MonoBehaviour
 
     private void CheckDeath()
     {
-        if (CurrentHealth <= 0 || transform.position.y <= -10)
+        if (currentHealth <= 0 || transform.position.y <= -10)
         {
             Time.timeScale = 0;
-            DeathWindow.SetActive(true);
+            deathWindow.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
@@ -110,78 +107,14 @@ public class Player : MonoBehaviour
         Debug.Log(damage);
     }
 
-    public void UpdateRecipeStatus()
-    {
-        ingredients.text = "";
-        for (int i = 0; i < quest.Ingredients.Length; i++)
-        {
-            amount = quest.Ingredients[i].amount;
-            if(quest.Ingredients[i].currentAmount < amount)
-            {
-                ingredients.text += quest.Ingredients[i].currentAmount + " / " + amount + "\n";
-            }
-            else
-            {
-                ingredients.text += "Done" + "\n";
-            }
-        }
-        IsAllCollected();
-    }
-
-    public void IsAllCollected()
-    {
-        for (int i = 0; i < quest.Ingredients.Length; i++)
-        {
-            if(quest.Ingredients[i].currentAmount != quest.Ingredients[i].amount)
-            {
-                quest.ingredientsComplete = false;
-                break;
-            }
-            else
-            {
-                quest.ingredientsComplete = true;
-            }
-        }
-    }
-
-    public void DisplayRecipeStatus()
-    {
-        recipeStatusWindow.SetActive(true);
-        ingredients.text = "";
-        for (int i = 0; i < quest.Ingredients.Length; i++)
-        {
-            for (int y = 0; y < iconsProgress.Length; y++)
-            {
-                iconsProgress[i].sprite = quest.Ingredients[i].icon;
-                if (iconsProgress[y].sprite != null)
-                {
-                    iconsProgress[y].gameObject.SetActive(true);
-                }
-            
-            }
-                amount = quest.Ingredients[i].amount;
-                ingredients.text += quest.Ingredients[i].currentAmount + " / " + amount + "\n";
-        }
-    }
-
     public void ReSpawn()
     {
         deathWindow.SetActive(false);
         Time.timeScale = 1;
-        transform.position = (spawnPoint);
-        if(quest != null)
-        {
-            quest.deaths++;
-            for (int i = 0; i < quest.Ingredients.Length; i++)
-            {
-               quest.Ingredients[i].currentAmount = 0;
-            }
-        }
+        transform.position = (_spawnPoint);
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Inventory.instance.Clear();
+        Cursor.lockState = CursorLockMode.Locked; 
         currentHealth = maxHealth;
-        healthBar.SetHealth(maxHealth);
-        UpdateRecipeStatus();
+        healthBar.SetHealth(maxHealth);   
     }
 }

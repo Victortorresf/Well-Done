@@ -24,36 +24,6 @@ public class Interactable : MonoBehaviour
     }
     public void Collect(Ingredient item)
     {
-        if(item.type != Itemtype.Health)
-        {
-            for(int i = 0; i < player.quest.Ingredients.Length; i++)
-            {               
-                if (item.type == player.quest.Ingredients[i].type && player.quest.Ingredients[i].currentAmount < player.quest.Ingredients[i].amount)
-                {
-                    bool wasAdded = Inventory.instance.Add(item);
-                    player.quest.Ingredients[i].currentAmount++;
-                    player.UpdateRecipeStatus();
-
-                    if (wasAdded)
-                    {
-                        if(gameObject.tag != "DroppedIngredient")
-                        {
-                            stillThere = false;
-                            collected = true;
-                            gameObject.GetComponent<BoxCollider>().enabled = false;
-                            StartCoroutine(SpawnObject());
-                        }
-                        else
-                        {
-                            collected = true;
-                            Destroy(gameObject);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-
         if(item.type == Itemtype.Health)
         {
             GetHealth();

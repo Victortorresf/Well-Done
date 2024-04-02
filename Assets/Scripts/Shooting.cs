@@ -20,15 +20,14 @@ public class Shooting : MonoBehaviour
 
     float reloadTime = 1f;
     public int weaponType = FryingPan;
-    int maxRifleAmmo = 80, grenadesAmount = 3, maxDonuts = 5;
+    int maxRifleAmmo = 80, grenadesAmount = 3, maxDonuts = 5, maxAmmo;
     int minDamage = 20, maxDamage = 40;
     public int currentRifleAmmo, currentGrenades, currentDonuts, currentAmmo;
     public GameObject impact, grenadePrefab, donutPrefab;
     public Text ammoText;
     public Camera fpscam;
     public GameObject playerObject;
-    public NPC npc;
-    public GameObject[] weapons = new GameObejct[4];
+    public GameObject[] weapons;
     public GameObject[] windows;
     public AudioManager audioManager;
     Player player;
@@ -75,13 +74,9 @@ public class Shooting : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
             Interact();
 
-        if (Input.GetKeyDown("f") && npc.givenRecipeWindow.activeInHierarchy)
-            npc.AcceptRecipe();
-
         if (Input.GetKeyDown("escape"))
             CloseWindow();   
     }
-
 
     void UpdateAmmoCount()
     {
@@ -104,8 +99,6 @@ public class Shooting : MonoBehaviour
                 maxAmmo = grenadesAmount;
                 break;
         }
-        reloadAmount = (weaponType != FryingPan) ? 3 : 0;
-        ammoText.text = $"{currentAmmo} / {maxAmmo} x {reloadAmount}";
     }
 
     void CloseWindow()
@@ -122,7 +115,7 @@ public class Shooting : MonoBehaviour
         weaponType = type;
         foreach (GameObject weapon in weapons)
         {
-        weapon.SetActive(false);
+            weapon.SetActive(false);
         }
     
         switch (type)
@@ -150,16 +143,16 @@ public class Shooting : MonoBehaviour
         switch (type)
         {
             case FryingPan:
-                pan.SetActive(true);
+                Pan.SetActive(true);
                 break;
             case Donut:
-                donut.SetActive(true);
+                Donut.SetActive(true);
                 break;
             case ToasterGun:
-                toaster.SetActive(true);
+                Toaster.SetActive(true);
                 break;
             case PineappleGrenade:
-                grenade.SetActive(true);
+                Grenade.SetActive(true);
                 break;
         }
     }
@@ -170,7 +163,6 @@ public class Shooting : MonoBehaviour
         if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit, 20f))
         {
             Interactable item = hit.transform.GetComponent<Interactable>();
-            npc = hit.transform.GetComponent<NPC>();
             Door door = hit.transform.GetComponent<Door>();
             if (hit.transform.gameObject.CompareTag("Ammunition"))
             {
@@ -183,10 +175,6 @@ public class Shooting : MonoBehaviour
                 item.Collect(item.item);
             }
 
-            if (npc != null)
-            {
-                npc.InteractWithPlayer();
-            }
             if (door != null)
             {
                 door.OpenDoor();
@@ -200,13 +188,10 @@ public class Shooting : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
 
         currentAmmo = maxAmmo;
-        currentRifleAmmo = maxAmmo;
-        reloadAmount--;
     }
 
     void RechargeAmmo()
     {
-        reloadAmount = 3;
         grenadesAmount = 3;
         currentGrenades = grenadesAmount;
         currentRifleAmmo = maxRifleAmmo;
