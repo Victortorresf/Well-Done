@@ -113,11 +113,15 @@ public class Shooting : MonoBehaviour
     void SelectWeapon(int type)
     {
         weaponType = type;
+        
+        // Deactivate all weapons
         foreach (GameObject weapon in weapons)
         {
             weapon.SetActive(false);
         }
-    
+
+        // Activate selected weapon
+        weapons[type - 1].SetActive(true); 
         switch (type)
         {
             case FryingPan:
@@ -137,22 +141,6 @@ public class Shooting : MonoBehaviour
                 break;
             case PineappleGrenade:
                 fireRate = 0.5f;
-                break;
-        }
-        // Activate selected weapon
-        switch (type)
-        {
-            case FryingPan:
-                Pan.SetActive(true);
-                break;
-            case Donut:
-                Donut.SetActive(true);
-                break;
-            case ToasterGun:
-                Toaster.SetActive(true);
-                break;
-            case PineappleGrenade:
-                Grenade.SetActive(true);
                 break;
         }
     }
