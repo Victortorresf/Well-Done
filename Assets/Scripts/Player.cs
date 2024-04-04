@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     // Player Stats
     public int level { get; private set; } = 1;
-    public int currentHealth { get; private set; }
+    public int currentHealth;
     public int maxHealth = 100;
     public int Speed { get; private set; } = 10;
 
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private Vector3 _spawnPoint;
     private float _turnSmoothVelocity;
-    private Vector3 _direction;
+    public Vector3 _direction;
 
     private void Start()
     {

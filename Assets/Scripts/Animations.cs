@@ -20,7 +20,7 @@ public class Animations : MonoBehaviour
     void Update()
     {
         weapon = (int) GetComponentInChildren<Shooting>().weaponType;
-        Vector3 moveDirection = player.direction;
+        Vector3 moveDirection = player._direction;
         bool runPressed = Input.GetKey("left shift");
         animator.SetInteger("Weapon Type", weapon);
 
