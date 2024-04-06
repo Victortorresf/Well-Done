@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     public const int Donut = 2;
     public const int ToasterGun = 3;
     public const int PineappleGrenade = 4;
+    public const int PepperGun = 5;
 
     public int damage = 10;
     public int range = 20;
@@ -20,10 +21,10 @@ public class Shooting : MonoBehaviour
 
     float reloadTime = 1f;
     public int weaponType = FryingPan;
-    int maxRifleAmmo = 80, grenadesAmount = 3, maxDonuts = 5, maxAmmo;
+    int maxRifleAmmo = 80, grenadesAmount = 3, maxDonuts = 5, maxPeppers = 15, maxAmmo;
     int minDamage = 20, maxDamage = 40;
-    public int currentRifleAmmo, currentGrenades, currentDonuts, currentAmmo;
-    public GameObject impact, grenadePrefab, donutPrefab;
+    public int currentRifleAmmo, currentGrenades, currentDonuts, currentPeppers, currentAmmo;
+    public GameObject rifleEffect, grenadePrefab, donutPrefab;
     public Text ammoText;
     public Camera fpscam;
     public GameObject playerObject;
@@ -54,6 +55,8 @@ public class Shooting : MonoBehaviour
             SelectWeapon(ToasterGun);
         else if (player.level >= 4 && Input.GetKeyDown("4"))
             SelectWeapon(PineappleGrenade);
+        else if (player.level >= 5 && Input.GetKeyDown("5"))
+            SelectWeapon(PepperGun);
 
         if (Input.GetKeyDown("r") && currentAmmo < maxAmmo && weaponType != Donut && weaponType != PineappleGrenade && weaponType != FryingPan)
             StartCoroutine(Reload());
@@ -61,7 +64,7 @@ public class Shooting : MonoBehaviour
         if ((Input.GetButton("Fire1") && Time.time >= nextTimetoFire) && !isPaused)
         {
             nextTimetoFire = Time.time + 1f / fireRate;
-            if ((currentAmmo > 0 && weaponType == ToasterGun) || weaponType == FryingPan)
+            if ((currentAmmo > 0 && (weaponType == ToasterGun || weaponType == PepperGun)) || weaponType == FryingPan)
                 Shoot();
 
             if (weaponType == PineappleGrenade && currentGrenades > 0)
@@ -97,6 +100,10 @@ public class Shooting : MonoBehaviour
             case PineappleGrenade:
                 currentAmmo = currentGrenades;
                 maxAmmo = grenadesAmount;
+                break;
+            case PepperGun:
+                currentAmmo = currentPeppers;
+                maxAmmo = maxPeppers;
                 break;
         }
     }
@@ -141,6 +148,12 @@ public class Shooting : MonoBehaviour
                 break;
             case PineappleGrenade:
                 fireRate = 0.5f;
+                break;
+            case PepperGun:
+                fireRate = 4f;
+                minDamage = 5;
+                maxDamage = 25;
+                range = 20;
                 break;
         }
     }
@@ -197,8 +210,13 @@ public class Shooting : MonoBehaviour
                 currentAmmo--;
                 currentRifleAmmo--;
                 audioManager.Play("Toaster");
-                GameObject effect = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+                GameObject effect = Instantiate(rifleEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(effect, 1f);
+            }
+            else if (weaponType == PepperGun)
+            {
+                currentAmmo--;
+                currentPeppers--;
             }
 
             EnemyAI target = hit.transform.GetComponent<EnemyAI>();
